@@ -1,0 +1,41 @@
+﻿@model TP3.Models.Person
+
+@{
+    ViewData["Title"] = "Search";
+}
+<div style="display: flex;justify-content:space-evenly; align-items:center;width:100% ">
+    <h1>Search</h1>
+  
+</div>
+
+
+
+<h4>Person</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+ 
+    </div>
+</div>
+       <form asp-controller="Person" asp-action="search" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label  asp-for="FirstName" class="control-label"></label>
+                <input name="first_name" asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Country" class="control-label"></label>
+                <input name="country" asp-for="Country" class="form-control" />
+                <span asp-validation-for="Country" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="SEARCH" class="btn btn-primary" />
+            </div>
+        </form>
+<div>
+    <a asp-action="all">Back to List</a>
+</div>

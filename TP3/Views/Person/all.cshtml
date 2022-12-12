@@ -1,7 +1,54 @@
 ﻿
+@model List<TP3.Models.Person>
+
 @{
-    ViewData["Title"] = "all";
+    ViewData["Title"] = "ALL PERSONS";
 }
 
-<h1>all</h1>
+<div style="display: flex;justify-content:space-evenly; align-items:center;width:100% ">
+    <h1> ALL Persons</h1>
+ 
+</div>
 
+<div>
+    <hr />
+    @{
+        foreach (Person p in Model)
+        {
+            <dl class="row">
+                <dt class="col-sm-2">
+                    Id
+                </dt>
+                <dd class="col-sm-10">
+                    @p.Id
+                </dd>
+                <dt class="col-sm-2">
+                    first Name
+                </dt>
+                <dd class="col-sm-10">
+                    @p.FirstName
+                </dd>
+                <dt class="col-sm-2">
+                    last_name
+                </dt>
+                <dd class="col-sm-10">
+                    @p.LastName
+                </dd>
+                <dt class="col-sm-2">
+                    email
+                </dt>
+                <dd class="col-sm-10">
+                    @p.Email
+                </dd>
+               
+                <dt class="col-sm-2">
+                    country
+                </dt>
+                <dd class="col-sm-10">
+                    @p.Country
+                </dd>
+            </dl>
+        }
+    }
+
+</div>

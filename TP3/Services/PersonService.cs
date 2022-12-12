@@ -1,5 +1,5 @@
-﻿using System.Data.SQLite;
-using TP3.Models;
+﻿using System;
+using System.Data.SQLite;
 using TP3.Models;
 
 namespace TP3.Services
@@ -21,14 +21,16 @@ namespace TP3.Services
             SQLiteDataReader sqlite_datareader = sqlite_cmd.ExecuteReader();
             while (sqlite_datareader.Read())
             {
-                int id = sqlite_datareader.GetInt16(0);
-                string first_name = sqlite_datareader.GetString(1);
-                string last_name = sqlite_datareader.GetString(2);
-                string email = sqlite_datareader.GetString(3);
-                string date = sqlite_datareader.GetString(4);
-                string country = sqlite_datareader.GetString(6);
+                Person person = new Person();
+                person.Id = sqlite_datareader.GetInt16(0);
+                person.FirstName = sqlite_datareader.GetString(1);
+                person.LastName = sqlite_datareader.GetString(2);
+                person.Email = sqlite_datareader.GetString(3);
+                person.DateBirth = sqlite_datareader.GetString(4);
+                person.Country = sqlite_datareader.GetString(6);
 
-                allPersons.Add(new Person(id, first_name, last_name, email, date, country));
+
+                allPersons.Add(person);
 
             }
 
@@ -44,34 +46,71 @@ namespace TP3.Services
             SQLiteConnection sqlite_conn = new SQLiteConnection("DataSource=database.db"); ;
             sqlite_conn.Open();
             SQLiteCommand sqlite_cmd;
-            string query = "SELECT * FROM personal_info";
+            string query = "SELECT *  FROM personal_info WHERE id=@param1 ";
             sqlite_cmd = sqlite_conn.CreateCommand();
             sqlite_cmd.CommandText = query;
+            sqlite_cmd.Parameters.AddWithValue("param1", idDto);
             sqlite_cmd.ExecuteNonQuery();
             SQLiteDataReader sqlite_datareader = sqlite_cmd.ExecuteReader();
-            var Personne = new Person();
-            while (sqlite_datareader.Read())
+            var person = new Person();
+            sqlite_datareader.Read();
+            // verify if it's empty
+            if (!sqlite_datareader.HasRows)
             {
-                int id = sqlite_datareader.GetInt16(0);
-                if (id != idDto) continue;
-                string first_name = sqlite_datareader.GetString(1);
-                string last_name = sqlite_datareader.GetString(2);
-                string email = sqlite_datareader.GetString(3);
-                string date = sqlite_datareader.GetString(4);
-                string country = sqlite_datareader.GetString(6);
-
-                Personne = new Person(id, first_name, last_name, email, date, country);
-                break;
+                return null;
             }
+
+            
+            person.Id = sqlite_datareader.GetInt16(0);
+            person.FirstName = sqlite_datareader.GetString(1);
+            person.LastName = sqlite_datareader.GetString(2);
+            person.Email = sqlite_datareader.GetString(3);
+            person.DateBirth = sqlite_datareader.GetString(4);
+            person.Country = sqlite_datareader.GetString(6);
+
 
 
             sqlite_conn.Close();
 
 
-            return Personne;
+            return person;
         }
 
+        public Person Search( string country, string firstname = "Conroy")
+        {
+            SQLiteConnection sqlite_conn = new SQLiteConnection("DataSource=database.db"); ;
+            sqlite_conn.Open();
+            SQLiteCommand sqlite_cmd;
+            string query = "SELECT *  FROM personal_info WHERE first_name=@param1 AND country=@param2 ";
+            sqlite_cmd = sqlite_conn.CreateCommand();
+            sqlite_cmd.CommandText = query;
+            sqlite_cmd.Parameters.AddWithValue("param1", firstname);
+            sqlite_cmd.Parameters.AddWithValue("param2", country);
+            sqlite_cmd.ExecuteNonQuery();
+            SQLiteDataReader sqlite_datareader = sqlite_cmd.ExecuteReader();
+            var person = new Person();
+            sqlite_datareader.Read();
+            // verify if it's empty
+            if (!sqlite_datareader.HasRows)
+            {
+                return null;
+            }
 
+
+            person.Id = sqlite_datareader.GetInt16(0);
+            person.FirstName = sqlite_datareader.GetString(1);
+            person.LastName = sqlite_datareader.GetString(2);
+            person.Email = sqlite_datareader.GetString(3);
+            person.DateBirth = sqlite_datareader.GetString(4);
+            person.Country = sqlite_datareader.GetString(6);
+
+
+
+            sqlite_conn.Close();
+
+
+            return person;
+        }
 
     }
 }
