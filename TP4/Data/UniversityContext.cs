@@ -5,10 +5,10 @@ namespace TP4.Data
 {
     public class UniversityContext : DbContext
     {
-        // make this class singleton
+      
         private static UniversityContext _instance;
 
-        public DbSet<Student> Students { get; set; }
+        public DbSet<Student> Student { get; set; }
       
 
         public UniversityContext(DbContextOptions<UniversityContext> options) : base(options)
@@ -19,7 +19,7 @@ namespace TP4.Data
             {
                 var optionsBuilder = new DbContextOptionsBuilder<UniversityContext>();
                 optionsBuilder.UseSqlite("DataSource=university.db");
-                _instance = new UniversityContext(optionsBuilder.Options);
+                _instance =   new UniversityContext(optionsBuilder.Options);
 
             }
             return _instance;

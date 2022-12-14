@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using TP4;
 using TP4.Data;
+using TP4.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 

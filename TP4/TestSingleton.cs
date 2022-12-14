@@ -1,4 +1,5 @@
 ﻿using TP4.Data;
+using TP4.Models;
 
 namespace TP4
 {
@@ -21,6 +22,8 @@ namespace TP4
             {
                 Console.WriteLine("Singleton failed, variables contain different instances.");
             }
+            // Test the Get Students
+            List<Student> s = context1.Student.ToList();
         }
     }
 }
