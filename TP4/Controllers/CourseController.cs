@@ -27,5 +27,23 @@ namespace TP4.Controllers
             }
             return View(courses);
         }
+
+        [HttpGet("Course/Details/{course}")]
+        public IActionResult Details(string course)
+        {
+            var contextoptions = new DbContextOptionsBuilder<UniversityContext>().UseSqlite("DataSource=university.db");
+
+            StudentRepository srepo = new StudentRepository(new UniversityContext(contextoptions.Options));
+            List<Student> students = (List<Student>)srepo.GetStudents();
+            List<Student> studentsInCourse = new List<Student>();
+            foreach (var student in students)
+            {
+                if (student.course == course)
+                {
+                    studentsInCourse.Add(student);
+                }
+            }
+            return View(studentsInCourse);
+        }
     }
 }
