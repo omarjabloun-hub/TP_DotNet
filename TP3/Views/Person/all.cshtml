@@ -12,43 +12,24 @@
 
 <div>
     <hr />
-    @{
+    <div class="container-fluid">
+        @{
+        
         foreach (Person p in Model)
         {
-            <dl class="row">
-                <dt class="col-sm-2">
-                    Id
-                </dt>
-                <dd class="col-sm-10">
-                    @p.Id
-                </dd>
-                <dt class="col-sm-2">
-                    first Name
-                </dt>
-                <dd class="col-sm-10">
-                    @p.FirstName
-                </dd>
-                <dt class="col-sm-2">
-                    last_name
-                </dt>
-                <dd class="col-sm-10">
-                    @p.LastName
-                </dd>
-                <dt class="col-sm-2">
-                    email
-                </dt>
-                <dd class="col-sm-10">
-                    @p.Email
-                </dd>
-               
-                <dt class="col-sm-2">
-                    country
-                </dt>
-                <dd class="col-sm-10">
-                    @p.Country
-                </dd>
-            </dl>
-        }
-    }
+            <div class="col mb-3">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">@p.FirstName @p.LastName</h5>
+                        <p>Email : @p.Email</p>
+                        <p>Country : @p.Country</p>
+                        <p>Id : @p.Id</p>
 
+                    </div>
+                </div>
+            </div>
+        }
+       
+    }
+    </div>
 </div>

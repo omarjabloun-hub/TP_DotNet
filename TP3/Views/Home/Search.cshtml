@@ -1,4 +1,4 @@
-﻿@model TP3.Models.Person
+﻿@model TP3.Models.PersonForm
 
 @{
     ViewData["Title"] = "Search";
@@ -17,12 +17,12 @@
  
     </div>
 </div>
-       <form asp-controller="Person" asp-action="search" method="post">
+       <form asp-controller="Person" asp-action="Search"  method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
                 <label  asp-for="FirstName" class="control-label"></label>
-                <input name="first_name" asp-for="FirstName" class="form-control" />
+                <input name="FirstName" asp-for="FirstName" class="form-control" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
 
@@ -36,6 +36,3 @@
                 <input type="submit" value="SEARCH" class="btn btn-primary" />
             </div>
         </form>
-<div>
-    <a asp-action="all">Back to List</a>
-</div>

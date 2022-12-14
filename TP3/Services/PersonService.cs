@@ -76,7 +76,7 @@ namespace TP3.Services
             return person;
         }
 
-        public Person Search( string country, string firstname = "Conroy")
+        public Person Search( string country, string firstname )
         {
             SQLiteConnection sqlite_conn = new SQLiteConnection("DataSource=database.db"); ;
             sqlite_conn.Open();
